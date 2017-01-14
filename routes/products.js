@@ -14,12 +14,12 @@ router.route('/')
 	res.json({"products": productsArr});
 })
 	.post((req, res) => {
-		let product =req.body;
+		let product = req.body;
 		product.id = `${id}`;
 		productsArr.push(product);
 		console.log(productsArr);
 		id++;
-		res.send('Let\'s create a new product!');
+		res.redirect(201, '/');
 })
 	.put((req, res) => {
 		res.send('This puts shit somewhere');
