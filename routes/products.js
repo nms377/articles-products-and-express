@@ -30,13 +30,27 @@ function editProduct(productsArr, productID, newProductName){
 	}
 }
 
+function deleteProduct(productsArr, productID, newProductName){
+	for(let i=0; i < productsArr.length; i++){
+		if(productsArr[i].id === productID){
+			productsArr.splice(i, 1);
+		}
+	}
+}
+
 router.route('/:id')
 	.put((req, res) => {
-	let newProductName = req.body.name;
-	let productID = req.body.id;
-	let newProduct = editProduct(productsArr, productID, newProductName);
-	console.log(productsArr);
-	res.redirect(201, '/:id');
+		let newProductName = req.body.name;
+		let productID = req.body.id;
+		let newProduct = editProduct(productsArr, productID, newProductName);
+		console.log(productsArr);
+		res.redirect(201, '/:id');
+})
+	.delete((req,res) => {
+		let newProductName = req.body.name;
+		let productID = req.body.id;
+		let newProduct = deleteProduct(productsArr, productID, newProductName);
+		console.log(productsArr);
 });
 
 module.exports = router;
