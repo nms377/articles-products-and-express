@@ -22,20 +22,21 @@ router.route('/')
 		res.redirect(201, '/');
 });
 
+function editProduct(productsArr, productID, newProductName){
+	for(let i=0; i < productsArr.length; i++){
+		if(productsArr[i].id === productID){
+			productsArr[i].name = newProductName;
+		}
+	}
+}
+
 router.route('/:id')
 	.put((req, res) => {
+	let newProductName = req.body.name;
 	let productID = req.body.id;
-	//loop through the array of objects
-	for(let i=0; i < productsArr.length; i++){
-		//loop through array and find the id that matches the id if it matches
-		if(productsArr[i].id === productID){
-				//then change the product name in that object
-				productsArr[i].name = req.body.name;
-		}
-		console.log(productsArr[i].name);
-	}
-	// console.log(productsArr);
-	res.send('test');
+	let newProduct = editProduct(productsArr, productID, newProductName);
+	console.log(productsArr);
+	res.redirect(201, '/:id');
 });
 
 module.exports = router;
