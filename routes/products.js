@@ -11,15 +11,12 @@ var id = 1;
 
 router.route('/')
 	.get((req,res) => {
-	console.log('products', productsArr);
-	res.render('../templates/products/index', productsArr);
 	res.json({"poducts": productsArr});
 })
 	.post((req, res) => {
 		let product = req.body;
 		product.id = `${id}`;
 		productsArr.push(product);
-		console.log(productsArr);
 		id++;
 		res.redirect(201, '/');
 });
