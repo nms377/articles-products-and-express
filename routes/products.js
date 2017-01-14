@@ -5,7 +5,7 @@ const app = express();
 const router = express.Router();
 
 var productsArr = [];
-var id = 0;
+var id = 1;
 
 //define the products route
 router.route('/')
@@ -51,6 +51,7 @@ router.route('/:id')
 		let productID = req.body.id;
 		let newProduct = deleteProduct(productsArr, productID, newProductName);
 		console.log(productsArr);
+		res.redirect(201, '/');
 });
 
 module.exports = router;
