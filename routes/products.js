@@ -20,9 +20,18 @@ router.route('/')
 		console.log(productsArr);
 		id++;
 		res.redirect(201, '/');
-})
+});
+
+router.route('/:id')
 	.put((req, res) => {
-		res.send('This puts shit somewhere');
+	// for(let i=0; i <productsArr.length; i++){
+	// 	if(i === productsArr[i].id){
+	// 		productsArr[i].name = 'this';
+	// 	}
+
+	// }
+	console.log(productsArr.id, productsArr.name);
+	res.send('Test');
 });
 
 module.exports = router;
