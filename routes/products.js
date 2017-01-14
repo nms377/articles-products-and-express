@@ -24,13 +24,13 @@ router.route('/')
 
 router.route('/:id')
 	.put((req, res) => {
-	// for(let i=0; i <productsArr.length; i++){
-	// 	if(i === productsArr[i].id){
-	// 		productsArr[i].name = 'this';
-	// 	}
+	for(let i=0; i < productsArr.length; i++){
+		if(productsArr.indexOf(i)){
+			productsArr[i].name = req.body.name;
+		}
 
-	// }
-	console.log(productsArr.id, productsArr.name);
+	}
+	console.log(productsArr);
 	res.send('Test');
 });
 
