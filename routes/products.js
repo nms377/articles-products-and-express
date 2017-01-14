@@ -1,17 +1,19 @@
+//imports
 const server = require('../server');
 const express = require('express');
 
+//invocations
 const app = express();
 const router = express.Router();
 
 var productsArr = [];
 var id = 1;
 
-//define the products route
 router.route('/')
 	.get((req,res) => {
 	console.log('products', productsArr);
-	res.json({"products": productsArr});
+	res.render('../templates/products/index', productsArr);
+	res.json({"poducts": productsArr});
 })
 	.post((req, res) => {
 		let product = req.body;
@@ -22,7 +24,8 @@ router.route('/')
 		res.redirect(201, '/');
 });
 
-function editProduct(productsArr, productID, newProductName){
+//edits product
+function editProduct(productsArr, productID, body, newProductName){
 	for(let i=0; i < productsArr.length; i++){
 		if(productsArr[i].id === productID){
 			productsArr[i].name = newProductName;
@@ -30,6 +33,7 @@ function editProduct(productsArr, productID, newProductName){
 	}
 }
 
+//deletes product
 function deleteProduct(productsArr, productID, newProductName){
 	for(let i=0; i < productsArr.length; i++){
 		if(productsArr[i].id === productID){
@@ -40,9 +44,10 @@ function deleteProduct(productsArr, productID, newProductName){
 
 router.route('/:id')
 	.put((req, res) => {
+		let body = req.body;
 		let newProductName = req.body.name;
 		let productID = req.body.id;
-		let newProduct = editProduct(productsArr, productID, newProductName);
+		let newProduct = editProduct(productsArr, productID, body, newProductName);
 		console.log(productsArr);
 		res.redirect(201, '/:id');
 })
