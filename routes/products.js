@@ -2,6 +2,8 @@
 const server = require('../server');
 const express = require('express');
 const products = require('../db/products');
+const productList = products.all();
+console.log('productList', productList);
 
 //invocations
 const app = express();
@@ -10,7 +12,11 @@ const router = express.Router();
 router.route('/')
 	.get((req,res) => {
 	let productList = products.all();
-	res.render('products/index', products);
+	let store = {
+		'productLists': productList
+	}
+	console.log('productList 2', productList);
+	res.render('products/index', store);
 })
 	.post((req, res) => {
 		products.add(req.body);
