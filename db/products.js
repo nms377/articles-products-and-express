@@ -16,6 +16,15 @@ module.exports = (function(){
 		console.log(productsArr);
 	}
 
+	function _getProductById(data, id){
+		for(let i=0; i < productsArr.length; i++){
+			if(productsArr[i].id === parseInt(id)){
+				console.log(productsArr[i]);
+				return productsArr[i];
+			}
+		}
+	}
+
 	function _editProductById(data, id){
 
 		let productName = data.name;
@@ -45,6 +54,7 @@ module.exports = (function(){
 	return {
 		all: _all,
 		add: _add,
+		getProductById: _getProductById,
 		editProductById: _editProductById,
 		deleteProductById: _deleteProductById
 	};
