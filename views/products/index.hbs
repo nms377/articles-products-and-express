@@ -1,3 +1,9 @@
 <h1>PRODUCTS</h1>
 
-<p>Name: {{name}}</p>
+{{#each productLists}}
+<div class="productList">
+	<p>Name: {{name}}</p>
+	<p>Price: {{price}}</p>
+	<p>Inventory: {{inventory}}</p>
+</div>
+{{/each}}
