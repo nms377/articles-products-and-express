@@ -1,5 +1,15 @@
 <h1>PRODUCTS</h1>
 
+<form action="http://localhost:3000/products"  method="post" enctype="application/x-www-form-urlencoded">
+	<label name="name">Product Name</label>
+	<input name="name" type="text" class="POST-name"><br>
+	<label name="POST-price">Price</label>
+	<input name="price" type="text" class="POST-name"><br>
+	<label for="POST-inventory">Inventory</label>
+	<input name="inventory" type="text" class="POST-name"><br>
+	<button type="submit">Submit</button>
+</form>
+
 {{#each productLists}}
 <div class="productList">
 	<p>Name: {{name}}</p>
