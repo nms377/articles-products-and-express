@@ -1,0 +1,11 @@
+{{!-- display info based on product id --}}
+
+{{#if productIds}}
+	<div class="productId">
+		<p>Name: {{productIds.name}}</p>
+		<p>Price: {{productIds.price}}</p>
+		<p>Inventory: {{productIds.inventory}}</p>
+	</div>
+{{else}}
+	<p>oops...</p>
+{{/if}}
