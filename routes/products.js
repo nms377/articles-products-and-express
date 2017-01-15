@@ -3,7 +3,6 @@ const server = require('../server');
 const express = require('express');
 const products = require('../db/products');
 const productList = products.all();
-console.log('productList', productList);
 
 //invocations
 const app = express();
@@ -14,13 +13,13 @@ router.route('/')
 	let productList = products.all();
 	let store = {
 		'productLists': productList
-	}
+	};
 	console.log('productList 2', productList);
 	res.render('products/index', store);
 })
 	.post((req, res) => {
 		products.add(req.body);
-		res.redirect(201, '/');
+		res.redirect('/products');
 });
 
 router.route('/:id')
