@@ -20,22 +20,29 @@ module.exports = (function(){
 		let productName = data.name;
 
 		for(let i=0; i < productsArr.length; i++){
-			console.log(productsArr[i].id);
 			if(productsArr[i].id === parseInt(id)){
 				productsArr[i].name = productName;
-				console.log(productsArr[i]);
-			}else{
-				console.log('error');
 			}
 		}
 
+		console.log('updated product list:', productsArr);
+	}
+
+	function _deleteProductById(id){
+		for(let i=0; i < productsArr.length; i++){
+			if(productsArr[i].id === parseInt(id)){
+				productsArr.splice(i, 1);
+			}
+		}
+
+		console.log('updated product list: ', productsArr);
 	}
 
 	return {
 		all: _all,
 		add: _add,
 		editProductById: _editProductById,
-		// deleteProductById: _deleteProductById
+		deleteProductById: _deleteProductById
 	};
 
 })();
