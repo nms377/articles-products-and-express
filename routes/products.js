@@ -23,13 +23,21 @@ router.route('/')
 });
 
 router.route('/:id')
+	.get((req,res) => {
+		let productId = products.getProductById(req.body, req.params.id);
+		let store = {
+			'productIds': productId,
+			// 'id': req.body
+		};
+		res.render('products/product', store);
+	})
 	.put((req, res) => {
 		products.editProductById(req.body, req.params.id);
-		res.redirect(201, '/:id');
+		res.redirect('/:id');
 })
 	.delete((req,res) => {
 		products.deleteProductById(req.params.id);
-		res.redirect(201, '/');
+		res.redirect('/products');
 });
 
 module.exports = router;
