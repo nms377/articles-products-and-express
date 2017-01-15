@@ -1,10 +1,11 @@
 module.exports = (function(){
 
-	let product = {};
 	var productsArr = [];
+	let product = {productsArr};
 	var id = 0;
 
 	function _all(){
+		console.log(productsArr);
 		return productsArr;
 	}
 
@@ -18,6 +19,9 @@ module.exports = (function(){
 	function _editProductById(data, id){
 
 		let productName = data.name;
+		// will try to create a switch statement to be able to change the price and inventory
+		// let prodcutPrice = data.price;
+		// let productInventory = data.inventory;
 
 		for(let i=0; i < productsArr.length; i++){
 			if(productsArr[i].id === parseInt(id)){
