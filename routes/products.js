@@ -18,30 +18,17 @@ router.route('/')
 });
 
 //edits product
-function editProduct(productsArr, productID, product, newProductName){
-	for(let i=0; i < productsArr.length; i++){
-		if(productsArr[i].id === productID){
-			productsArr[i].name = newProductName;
-		}
-	}
-}
-
-//deletes product
-function deleteProduct(productsArr, productID, newProductName){
-	for(let i=0; i < productsArr.length; i++){
-		if(productsArr[i].id === productID){
-			productsArr.splice(i, 1);
-		}
-	}
-}
+// function editProduct(productsArr, productID, product, newProductName){
+// 	for(let i=0; i < productsArr.length; i++){
+// 		if(productsArr[i].id === productID){
+// 			productsArr[i].name = newProductName;
+// 		}
+// 	}
+// }
 
 router.route('/:id')
 	.put((req, res) => {
-		let product = req.body;
-		let newProductName = req.body.name;
-		let productID = req.body.id;
-		let newProduct = editProduct(productsArr, productID, product, newProductName);
-		console.log(productsArr);
+		products.editProductById(req.body, req.params.id);
 		res.redirect(201, '/:id');
 })
 	.delete((req,res) => {
