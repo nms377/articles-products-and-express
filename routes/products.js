@@ -1,28 +1,24 @@
 //imports
 const server = require('../server');
 const express = require('express');
+const products = require('../db/products');
 
 //invocations
 const app = express();
 const router = express.Router();
 
-var productsArr = [];
-var id = 1;
-
 router.route('/')
 	.get((req,res) => {
-	res.json({"poducts": productsArr});
+	let productList = products.all();
+	res.render('products/index', products);
 })
 	.post((req, res) => {
-		let product = req.body;
-		product.id = `${id}`;
-		productsArr.push(product);
-		id++;
+		products.add(req.body);
 		res.redirect(201, '/');
 });
 
 //edits product
-function editProduct(productsArr, productID, body, newProductName){
+function editProduct(productsArr, productID, product, newProductName){
 	for(let i=0; i < productsArr.length; i++){
 		if(productsArr[i].id === productID){
 			productsArr[i].name = newProductName;
@@ -41,10 +37,10 @@ function deleteProduct(productsArr, productID, newProductName){
 
 router.route('/:id')
 	.put((req, res) => {
-		let body = req.body;
+		let product = req.body;
 		let newProductName = req.body.name;
 		let productID = req.body.id;
-		let newProduct = editProduct(productsArr, productID, body, newProductName);
+		let newProduct = editProduct(productsArr, productID, product, newProductName);
 		console.log(productsArr);
 		res.redirect(201, '/:id');
 })
