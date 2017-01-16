@@ -1,19 +1,12 @@
 <h1>UPDATED PRODUCTS</h1>
 
-{{#if updateProduct}}
-	<form action="http://localhost:3000/products/:id/edit?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
-		<input type="hidden" name="id" value="{{updateProduct.id}}">
-		<label name="name">Product Name</label>
-			<input name="name" type="text id="edit-name" value="{{updateProduct.name}}"><br>
-		<label name="POST-price">Price</label>
-			<input name="price" type="text id="edit-price" value="{{updateProduct.price}}"><br>
-		<label for="POST-inventory">Inventory</label>
-			<input name="inventory" type="text id="edit-inventory" value="{{updateProduct.inventory}}"><br>
-		<button type="submit">Submit</button>
-	</form>
-{{/if}}
-
-	<p>Name: {{name}}</p>
-	<p>Price: {{price}}</p>
-	<p>Inventory: {{inventory}}</p>
+<form action="http://localhost:3000/products"  method="post" enctype="application/x-www-form-urlencoded">
+	<label name="name">Product Name</label>
+		<input name="name" type="text" class="POST-name" placeholder="i.e. Pizza"><br>
+	<label name="POST-price">Price</label>
+		<input name="price" type="text" class="POST-name" placeholder="i.e. $5"><br>
+	<label for="POST-inventory">Inventory</label>
+		<input name="inventory" type="text" class="POST-name" placeholder="i.e. 1000"><br>
+	<button type="submit">Submit</button>
+</form>
 
