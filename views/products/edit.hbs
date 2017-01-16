@@ -1,0 +1,13 @@
+<h1>PRODUCTS</h1>
+
+{{#if productId}}
+	<form action="http://localhost:3000/products/:id/edit"  method="post" enctype="application/x-www-form-urlencoded">
+		<label name="name">Product Name</label>
+			<input name="name" type="text id="edit-name" value="{{productId.name}}"><br>
+		<label name="POST-price">Price</label>
+			<input name="price" type="text id="edit-price" value="{{productId.price}}"><br>
+		<label for="POST-inventory">Inventory</label>
+			<input name="inventory" type="text id="edit-inventory" value="{{productId.inventory}}"><br>
+		<button type="submit">Submit</button>
+	</form>
+{{/if}}
