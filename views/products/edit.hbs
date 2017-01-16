@@ -1,7 +1,8 @@
-<h1>PRODUCTS</h1>
+<h1>EDIT PRODUCTS</h1>
 
 {{#if productId}}
-	<form action="http://localhost:3000/products/:id/edit"  method="post" enctype="application/x-www-form-urlencoded">
+	<form action="http://localhost:3000/products/{{productId.id}}/?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
+		<input type="hidden" name="id" value="{{productId.id}}">
 		<label name="name">Product Name</label>
 			<input name="name" type="text id="edit-name" value="{{productId.name}}"><br>
 		<label name="POST-price">Price</label>
@@ -11,3 +12,10 @@
 		<button type="submit">Submit</button>
 	</form>
 {{/if}}
+
+
+<div class="productList">
+	<p>Name: {{productId.name}}</p>
+	<p>Price: {{productId.price}}</p>
+	<p>Inventory: {{productId.inventory}}</p>
+</div>
