@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
+const methodOverride = require('method-override');
 const bs = require('body-parser');
 
 const hbs = handlebars.create({
@@ -12,6 +13,9 @@ const products = require('./routes/products');
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+//method override
+app.use(methodOverride('_method'));
 
 //parse application/x-www-form-urlencoded
 app.use(bs.urlencoded({ extended: false }));
