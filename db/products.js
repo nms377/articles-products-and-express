@@ -35,6 +35,7 @@ module.exports = (function(){
 		for(let i=0; i < productsArr.length; i++){
 			if(productsArr[i].id === parseInt(id)){
 				productsArr[i].name = productName;
+				return productsArr[i];
 			}
 		}
 
