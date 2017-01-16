@@ -22,6 +22,14 @@ router.route('/')
 		res.redirect('/products');
 });
 
+router.get('/new', (req, res) => {
+	let productList = products.all();
+	let store = {
+		'productLists': productList
+	};
+	res.render('products/new', store);
+});
+
 router.route('/:id')
 	.get((req,res) => {
 		let productId = products.getProductById(req.body, req.params.id);
