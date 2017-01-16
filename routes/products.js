@@ -30,10 +30,19 @@ router.route('/:id')
 			// 'id': req.body
 		};
 		res.render('products/product', store);
+	});
+
+router.route('/:id/edit')	
+	.get((req, res) => {
+		let productId = products.getProductById(req.body, req.params.id);
+		let store = {
+			'productId': productId
+		};
+		res.render('products/edit', store);
 	})
 	.put((req, res) => {
-		products.editProductById(req.body, req.params.id);
-		res.redirect('/:id');
+		// products.editProductById(req.body, req.params.id);
+		res.render('products/edit');
 })
 	.delete((req,res) => {
 		products.deleteProductById(req.params.id);
