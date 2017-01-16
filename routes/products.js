@@ -44,7 +44,7 @@ router.route('/:id')
 	let store = {
 		'productId': productId
 	};
-		res.redirect(303, `/products/${req.params.id}/edit`);
+		res.redirect(201, `/products/${req.params.id}`);
 });
 
 router.route('/:id/edit')	
