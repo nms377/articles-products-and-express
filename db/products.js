@@ -1,7 +1,6 @@
 module.exports = (function(){
 
 	var productsArr = [];
-	let product = {productsArr};
 	var id = 0;
 
 	function _all(){
@@ -10,10 +9,10 @@ module.exports = (function(){
 	}
 
 	function _add(data){
-		data['id'] = id;
+		data.id = id;
 		productsArr.push(data);
 		id++;
-		console.log(productsArr);
+		console.log('productsArr');
 	}
 
 	function _getProductById(data, id){

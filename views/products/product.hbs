@@ -1,10 +1,10 @@
 {{!-- display info based on product id --}}
 
-{{#if productIds}}
+{{#if productId}}
 	<div class="productId">
-		<p>Name: {{productIds.name}}</p>
-		<p>Price: {{productIds.price}}</p>
-		<p>Inventory: {{productIds.inventory}}</p>
+		<p>Name: {{productId.name}}</p>
+		<p>Price: {{productId.price}}</p>
+		<p>Inventory: {{productId.inventory}}</p>
 	</div>
 {{else}}
 	<p>oops...</p>

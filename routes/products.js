@@ -2,52 +2,51 @@
 const server = require('../server');
 const express = require('express');
 const products = require('../db/products');
-const productList = products.all();
+
 
 //invocations
 const app = express();
 const router = express.Router();
 
-router.route('/')
-	.get((req,res) => {
-	let productList = products.all();
-	let store = {
-		'productLists': productList
-	};
-	console.log('productList 2', productList);
-	res.render('products/index', store);
-})
-	.post((req, res) => {
-		products.add(req.body);
-		res.redirect('/products');
+//Create a Product
+router.get('/new', (req, res) => {
+	res.render('products/new');
 });
 
-router.get('/new', (req, res) => {
+
+router.route('/')
+	//View Product List
+	.get((req,res) => {
 	let productList = products.all();
-	let store = {
-		'productLists': productList
-	};
-	res.render('products/new', store);
+	console.log('productList 2', productList);
+	res.render('products/index', {"productList": productList});
+})
+	//When you add a new product, this redirects you the product page to view your product list
+	.post((req, res) => {
+			let productId = products.add(req.body);
+			let store = {
+				productId: productId
+			};
+			res.redirect('/products');
 });
 
 router.route('/:id')
+	//View Product Based on Id
 	.get((req,res) => {
-		let productId = products.getProductById(req.body, req.params.id);
-		let store = {
-			'productIds': productId,
-			// 'id': req.body
-		};
-		res.render('products/product', store);
+		let productId = products.editProductById(req.body, req.params.id);
+		res.redirect(303, '/products/${req.params.id}/edit');
 })
+	//Edits Product and redirects client to Product page to view product based on Id
 		.put((req, res) => {
 	let productId	=	products.editProductById(req.body, req.params.id);
 	let store = {
 		'productId': productId
 	};
-		res.redirect(201, `/products/${req.params.id}`);
+		res.redirect(303, `/products/${req.params.id}/edit`);
 });
 
 router.route('/:id/edit')	
+	//View Product Page to Edit Product Based on Id
 	.get((req, res) => {
 		let productId = products.getProductById(req.body, req.params.id);
 		let store = {
