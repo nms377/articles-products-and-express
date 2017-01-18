@@ -9,7 +9,7 @@ describe('Product API', () => {
 
 	describe('GET /products', () => {
 
-		it('should return an emptry object', done => {
+		it('should return an empty object', done => {
 			agent.get('/products')
 				.expect('Content-Type', /text\/html/)
 				.expect(200)
@@ -24,25 +24,10 @@ describe('Product API', () => {
 				});
 		});
 
+		// it('should create a new product'){
+			
+		// }
+
 	});
-
-	// describe('GET /id', () => {
-
-	// 	it('should return an id object', done => {
-	// 		agent.get('/id')
-	// 			.expect('Content-Type', /text\/html/)
-	// 			// .expect(200)
-	// 			.end((err, res) => {
-	// 				if(err) throw err;
-
-	// 				console.log( 'res.body', res.body);
-	// 				res.body.should.have.property('id');
-	// 				res.body.id.should.be.a('Number');
-
-	// 				done();
-	// 			});
-	// 	});
-
-	// });
 
 });
