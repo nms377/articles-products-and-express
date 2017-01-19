@@ -3,7 +3,7 @@ module.exports = (function() {
 var articlesList = [];
 
 function _add(data){
-	data.urlTitle = data.name;
+	data.urlTitle = encodeURI(data.title);
 	articlesList.push(data);
 	console.log(articlesList);
 }
