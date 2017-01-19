@@ -1,10 +1,10 @@
 <h1>ARTICLES</h1>
 
-{{!-- {{#each productList}}
-<div class="productList">
-	<p>Name: {{name}}</p>
-	<p>Price: {{price}}</p>
-	<p>Inventory: {{inventory}}</p>
-	<form action="http://localhost:3000/products/{{id}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Edit This Product</button></form>
+{{#each articlesList}}
+<div class="articlesList">
+	<p>Title: {{title}}</p>
+	<p>Article: {{body}}</p>
+	<p>Author: {{author}}</p>
+	<form action="http://localhost:3000/articles/{{urlTitle}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Edit This Article</button></form>
 </div>
-{{/each}} --}}
+{{/each}}
