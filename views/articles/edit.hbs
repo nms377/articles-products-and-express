@@ -1,0 +1,21 @@
+<h1>EDIT ARTICLE</h1>
+
+{{#if editArticle}}
+	<form action="http://localhost:3000/articles/{{editArticle.title}}/?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
+		<input type="hidden" name="title" value="{{editArticle.id}}">
+		<label name="name">Title</label>
+			<input name="title" type="text id="edit-article" value="{{editArticle.title}}"><br>
+		<label name="POST-author">Author</label>
+			<input name="author" type="text id="edit-author" value="{{editArticle.author}}"><br>
+		<label for="POST-body">Body</label>
+			<input name="body" type="text id="edit-body" value="{{editArticle.body}}"><br>
+		<button type="submit">Submit</button>
+	</form>
+{{/if}}
+
+
+<div class="productList">
+	<p>Title: {{editArticle.title}}</p>
+	<p>Author: {{editArticle.author}}</p>
+	<p>Body: {{editArticle.body}}</p>
+</div>
