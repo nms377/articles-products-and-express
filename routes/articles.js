@@ -3,7 +3,6 @@ const server = require('../server');
 const express = require('express');
 const articles = require('../db/articles');
 
-
 //invocations
 const app = express();
 const router = express.Router();
@@ -17,18 +16,19 @@ router.route('/')
 	//View Product List
 	.get((req,res) => {
 	let articlesList = articles.all();
+	// console.log(req.body);
 	res.render('articles/index', {"articlesList": articlesList});
 })
-	//When you add a new product, this redirects you the product page to view your product list
 	.post((req, res) => {
-			let addArticle = articles.add(req.body);
+			let addArticle = articles.add(req.body, req.params);
+			console.log('req.body.urlTitle', req.params);
 			res.redirect('/articles');
 });
 
-router.route('/articles/:title')
+router.route('/:title')
 	.get((req, res) => {
 		let articleId = articles.getByTitle(req.body, req.params.title);
-		res.redirect(303, `/articles/${req.params.title}`);
+		res.render('artciles', {"articleId": articleId});
 })
 	.put((req, res) => {
 		let editArticle = articles.edit(req.body, req.params.title);
