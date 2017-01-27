@@ -1,18 +1,35 @@
+
+const PG_PASS = process.env.PG_PASS;
+const pgp = require('pg-promise')();
+
+const db = pgp({
+	host: 'localhost',
+	port: 5432,
+	database: 'products',
+	user: 'nicolesandry',
+	password: PG_PASS
+});
+
 module.exports = (function(){
 
-	var productsArr = [];
-	var id = 0;
+	function _all(products){
 
-	function _all(){
-		console.log(productsArr);
-		return productsArr;
+		console.log('db-all', products);
+
+		return db.any('SELECT * FROM products');
+
 	}
 
-	function _add(data){
-		data.id = id;
-		productsArr.push(data);
-		id++;
-		console.log('productsArr');
+	function _add(add){
+		// data.id = id;
+		// productsArr.push(data);
+		// id++;
+		// console.log('productsArr');
+
+		console.log('db', add);
+		console.log(typeof add.name);
+
+		return db.none(`INSERT INTO products (product_name, price, inventory) VALUES ('${add.name}', ${add.price}, ${add.inventory})`, add);
 	}
 
 	function _getProductById(data, id){
