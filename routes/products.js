@@ -17,17 +17,29 @@ router.get('/new', (req, res) => {
 router.route('/')
 	//View Product List
 	.get((req,res) => {
-	let productList = products.all();
-	console.log('productList 2', productList);
-	res.render('products/index', {"productList": productList});
+	products.all(req.body)
+		.then( result => {
+			console.log('result', result, 'req.body', req.body);
+			res.render('products/index', {"productList": result});
+		})
+		.catch( err => {
+			res.send('Oops...');
+		});
 })
 	//When you add a new product, this redirects you the product page to view your product list
 	.post((req, res) => {
-			let productId = products.add(req.body);
-			let store = {
-				productId: productId
-			};
-			res.redirect('/products');
+
+		console.log('post', req.body);
+
+		products.add(req.body)
+			.then( add => {
+				console.log('add', add);
+				res.redirect('/products');
+			})
+			.catch( err => {
+				console.log('err', err);
+				res.redirect('/products/new');
+			});
 });
 
 router.route('/:id')
