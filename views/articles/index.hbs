@@ -3,8 +3,8 @@
 {{#each articlesList}}
 <div class="articlesList">
 	<p>Title: {{title}}</p>
-	<p>Article: {{body}}</p>
 	<p>Author: {{author}}</p>
-	<form action="http://localhost:3000/articles/{{urlTitle}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Edit This Article</button></form>
+	<p>Article: {{body}}</p>
+	<form action="http://localhost:3000/articles/{{title}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Edit This Article</button></form>
 </div>
 {{/each}}

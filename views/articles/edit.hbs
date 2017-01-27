@@ -1,7 +1,7 @@
 <h1>EDIT ARTICLE</h1>
 
 {{#if editArticle}}
-	<form action="http://localhost:3000/articles/{{editArticle.title}}/?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
+	<form action="http://localhost:3000/articles/{{editArticle.urlTitle}}/?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
 		<input type="hidden" name="title" value="{{editArticle.id}}">
 		<label name="name">Title</label>
 			<input name="title" type="text id="edit-article" value="{{editArticle.title}}"><br>
