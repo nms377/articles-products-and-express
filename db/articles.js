@@ -10,11 +10,13 @@ function _all(data){
 function _add(data){
 	data.urlTitle = encodeURI(data.title);
 	articlesList.push(data);
+	console.log(articlesList);
 }
 	
 function _getByTitle(data, title){
+	console.log('_getByTitle', title);
 		for(let i=0; i < articlesList.length; i++){
-			if(articlesList[i].title === parseInt(title)){
+			if(articlesList[i].title === title){
 				console.log(articlesList[i]);
 				return articlesList[i];
 			}
@@ -23,12 +25,12 @@ function _getByTitle(data, title){
 
 function _edit(data, title){
 	for(let i=0; i < articlesList.length; i++){
-			if(articlesList[i].title === parseInt(title)){
+			if(articlesList[i].title === title){
 				articlesList[i].title = data.title;
 				return articlesList[i];
 			}
 
-			if(articlesList[i].urlTitle === parseInt(title)){
+			if(articlesList[i].title === title){
 				articlesList[i].body = data.body;
 				return articlesList[i];
 			}
