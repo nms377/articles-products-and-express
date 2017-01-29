@@ -73,7 +73,7 @@ module.exports = (function(){
 			.then( (result) => {
 				console.log('check', req.params.id);
 				console.log(result);
-				res.redirect(`../${req.params.id}/edit`);
+				res.redirect(`../edit`);
 			})
 			.catch( err => {
 				console.log('error', err);
