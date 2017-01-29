@@ -17,36 +17,35 @@ router.get('/new', (req, res) => {
 router.route('/')
 	//View Product List
 	.get((req,res) => {
-	products.all(req.body)
-		.then( result => {
-			console.log('result', result, 'req.body', req.body);
-			res.render('products/index', {"productList": result});
-		})
-		.catch( err => {
-			res.send('Oops...');
-		});
+		console.log('get', req.body);
+		products.getAllProducts(req, res);	
 })
 	//When you add a new product, this redirects you the product page to view your product list
 	.post((req, res) => {
 
 		console.log('post', req.body);
 
-		products.add(req.body)
-			.then( add => {
-				console.log('add', add);
-				res.redirect('/products');
-			})
-			.catch( err => {
-				console.log('err', err);
-				res.redirect('/products/new');
-			});
+		products.addProduct(req, res);
 });
 
 router.route('/:id')
 	//View Product Based on Id
 	.get((req,res) => {
-		let productId = products.editProductById(req.body, req.params.id);
-		res.redirect(303, `/products/${req.params.id}/edit`);
+
+		console.log('req.body.id', req.params.id);
+
+		products.editProductById(req.params.id)
+			.then( id => {
+				console.log('then', id);
+				res.redirect(303, `/products/${id}/edit`);
+			})
+			.catch( err => {
+				console.log('req.body err', req.body);
+				res.send('you wrong');
+			});
+
+		// let productId = products.editProductById(req.body, req.params.id);
+		// res.redirect(303, `/products/${req.params.id}/edit`);
 })
 	//Edits Product and redirects client to Product page to view product based on Id
 		.put((req, res) => {
@@ -60,12 +59,21 @@ router.route('/:id')
 router.route('/:id/edit')	
 	//View Product Page to Edit Product Based on Id
 	.get((req, res) => {
-		let productId = products.getProductById(req.body, req.params.id);
-		// let store = {
-		// 	'productId': productId
-		// };
-		console.log(req.params.id);
-		res.render('products/edit', {"productId": productId});
+
+		console.log('/:id/edit base', req.params.id);
+
+		products.getProductById(req.params.id)
+			.then( id => {
+				console.log('/:id/edit', id);
+				res.render('products/edit', {"productId": id});
+			})
+			.catch( err => {
+				console.log('something happened');
+			});
+
+		// let productId = products.getProductById(req.body, req.params.id);
+		// console.log(req.params.id);
+		// res.render('products/edit', {"productId": productId});
 	})
 
 	.delete((req,res) => {
