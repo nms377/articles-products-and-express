@@ -27,9 +27,7 @@ router.route('/')
 });
 
 router.route('/:id')
-	.put((req, res) => {
-		products.editProductById(req, res);
-});
+
 	//View Product Based on Id
 	// .get((req,res) => {
 
@@ -55,9 +53,11 @@ router.route('/:id/edit')
 	//View Product Page to Edit Product Based on Id
 	.get((req, res) => {
 		// console.log('/:id/edit base', req.params.id);
-
 		products.getProductById(req, res);
 	})
+	.put((req, res) => {
+		products.editProductById(req, res);
+})
 	.delete((req,res) => {
 		products.deleteProductById(req.params.id);
 		res.redirect('/products');
