@@ -1,10 +1,19 @@
 <h1>PRODUCTS</h1>
 
+<form action="http://localhost:3000/products/new" method ="get">
+	<button>
+		Add a Product
+	</button>
+</form>
+
 {{#each productList}}
 <div class="productList">
 	<p>Name: {{product_name}}</p>
 	<p>Price: {{price}}</p>
 	<p>Inventory: {{inventory}}</p>
-	<form action="http://localhost:3000/products/{{id}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Edit This Product</button></form>
+	<form action="http://localhost:3000/products/{{id}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Edit this Product</button></form>
 </div>
+<form action="http://localhost:3000/products/{{id}}?_method=DELETE" method="post" enctype="application/x-www-form-urlencoded">
+	<button>Remove this Product</button>
+</form>
 {{/each}}

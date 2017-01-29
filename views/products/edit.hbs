@@ -13,6 +13,17 @@
 	</form>
 {{/if}}
 
+<form action= "http://localhost:3000/products/{{productId.id}}/?_method=DELETE" method="post" enctype="application/x-www-form-urlencoded">
+	<button>Remove this Product</button>
+</form>
+
+</form>
+<form action="http://localhost:3000/products" method="get">
+	<button>
+		View Products List
+	</button>
+</form>
+
 
 <div class="productList">
 	<p>Name: {{productId.product_name}}</p>
