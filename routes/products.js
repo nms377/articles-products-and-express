@@ -27,27 +27,9 @@ router.route('/')
 });
 
 router.route('/:id')
-
-	//View Product Based on Id
-	// .get((req,res) => {
-
-	// 	console.log('req.body.id', req.params.id);
-
-	// 	products.editProductById(req.params.id)
-	// 		.then( id => {
-	// 			console.log('then', id);
-	// 			res.redirect(303, `/products/${id}/edit`);
-	// 		})
-	// 		.catch( err => {
-	// 			console.log('req.body err', req.body);
-	// 			res.send('you wrong');
-	// 		});
-
-		// let productId = products.editProductById(req.body, req.params.id);
-		// res.redirect(303, `/products/${req.params.id}/edit`);
-// })
-	//Edits Product and redirects client to Product page to view product based on Id
-
+	.delete((req,res) => {
+		products.deleteProductById(req, res);
+});
 
 router.route('/:id/edit')	
 	//View Product Page to Edit Product Based on Id
@@ -57,10 +39,6 @@ router.route('/:id/edit')
 	})
 	.put((req, res) => {
 		products.editProductById(req, res);
-})
-	.delete((req,res) => {
-		products.deleteProductById(req.params.id);
-		res.redirect('/products');
 });
 
 module.exports = router;
