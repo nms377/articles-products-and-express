@@ -12,50 +12,76 @@ const db = pgp({
 
 module.exports = (function(){
 
-	function _all(products){
+	function _getAllProducts(req, res){
 
-		console.log('db-all', products);
+		console.log('db-all', req.body);
 
-		return db.any('SELECT * FROM products');
+		db.any('SELECT * FROM products')
+			.then( result => {
+				console.log('result', result, 'req.body', req.body);
+				res.render('products/index', {"productList": result});
+			})
+			.catch( err => {
+				res.send('Oops...');
+			});
 
 	}
 
-	function _add(add){
+	function _addProduct(req, res){
 		// data.id = id;
 		// productsArr.push(data);
 		// id++;
 		// console.log('productsArr');
 
-		console.log('db', add);
-		console.log(typeof add.name);
+		console.log('db', req.body);
+		console.log(typeof req.body.name);
 
-		return db.none(`INSERT INTO products (product_name, price, inventory) VALUES ('${add.name}', ${add.price}, ${add.inventory})`, add);
+		db.none(`INSERT INTO products (product_name, price, inventory) VALUES ('${req.body.name}', ${req.body.price}, ${req.body.inventory})`, req.body)
+			.then( add => {
+				console.log('add', add);
+				res.redirect('/products');
+			})
+			.catch( err => {
+				console.log('err', err);
+				res.redirect('/products/new');
+			});
 	}
 
-	function _getProductById(data, id){
-		for(let i=0; i < productsArr.length; i++){
-			if(productsArr[i].id === parseInt(id)){
-				console.log(productsArr[i]);
-				return productsArr[i];
-			}
-		}
+
+	function _getProductById(id){
+
+		console.log("getProductById", id);
+
+		return db.one('SELECT * FROM products WHERE id = ${id}');
+
+		// for(let i=0; i < productsArr.length; i++){
+		// 	if(productsArr[i].id === parseInt(id)){
+		// 		console.log(productsArr[i]);
+		// 		return productsArr[i];
+		// 	}
+		// }
 	}
 
-	function _editProductById(data, id){
+	function _editProductById(id){
 
-		let productName = data.name;
-		// will try to create a switch statement to be able to change the price and inventory
-		// let prodcutPrice = data.price;
-		// let productInventory = data.inventory;
+		console.log('editProductById', id);
 
-		for(let i=0; i < productsArr.length; i++){
-			if(productsArr[i].id === parseInt(id)){
-				productsArr[i].name = productName;
-				return productsArr[i];
-			}
-		}
+		return db.one(`SELECT * FROM products WHERE id = ${id}`);
 
-		console.log('updated product list:', productsArr);
+
+		// let productName = data.name;
+		// // will try to create a switch statement to be able to change the price and inventory
+		// // let prodcutPrice = data.price;
+		// // let productInventory = data.inventory;
+
+		// for(let i=0; i < productsArr.length; i++){
+		// 	if(productsArr[i].id === parseInt(id)){
+		// 		productsArr[i].name = productName;
+		// 		return productsArr[i];
+		// 	}
+		// }
+
+		// console.log('updated product list:', productsArr);
 	}
 
 	function _deleteProductById(id){
@@ -69,8 +95,8 @@ module.exports = (function(){
 	}
 
 	return {
-		all: _all,
-		add: _add,
+		getAllProducts: _getAllProducts,
+		addProduct: _addProduct,
 		getProductById: _getProductById,
 		editProductById: _editProductById,
 		deleteProductById: _deleteProductById
