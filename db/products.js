@@ -18,7 +18,7 @@ module.exports = (function(){
 
 		db.any('SELECT * FROM products')
 			.then( result => {
-				console.log('result', result, 'req.body', req.body);
+				console.log('result', result);
 				res.render('products/index', {"productList": result});
 			})
 			.catch( err => {
@@ -48,25 +48,38 @@ module.exports = (function(){
 	}
 
 
-	function _getProductById(id){
+	function _getProductById(req, res){
 
-		console.log("getProductById", id);
+		console.log("getProductById", req.params.id);
 
-		return db.one('SELECT * FROM products WHERE id = ${id}');
+		return db.one(`SELECT * FROM products WHERE id = ${req.params.id}`)
+			.then( id => {
+				console.log('/:id/edit', id);
+				res.render('products/edit', {"productId": id});
+			})
+			.catch( err => {
+				console.log('something happened');
+			});
 
-		// for(let i=0; i < productsArr.length; i++){
-		// 	if(productsArr[i].id === parseInt(id)){
-		// 		console.log(productsArr[i]);
-		// 		return productsArr[i];
-		// 	}
-		// }
 	}
 
-	function _editProductById(id){
+	function _editProductById(req, res){
 
-		console.log('editProductById', id);
+		console.log('editProductById', req.body);
+		console.log('editId', req.params.id);
+		console.log('editProduct', req.body.id);
 
-		return db.one(`SELECT * FROM products WHERE id = ${id}`);
+		db.none(`UPDATE products SET product_name = '${req.body.name}' WHERE id = ${req.body.id}`)
+			.then( (result) => {
+				console.log('check', req.params.id);
+				console.log(result);
+				res.redirect(`../${req.params.id}/edit`);
+			})
+			.catch( err => {
+				console.log('error', err);
+				console.log('this didn\'t work');
+			});
+	// })
 
 
 		// let productName = data.name;
