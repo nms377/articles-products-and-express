@@ -27,7 +27,7 @@ router.route('/:title')
 		// res.render('articles', {"articleId": getArticleByTitle});
 })
 	.put((req, res) => {
-		let editArticle = articles.edit(req.body, req.params.title);
+		articles.editArticleByTitle(req, res);
 })
 	.delete((req, res) => {
 		let deleteArticle = articles.delete(req.body, req.params.title);
