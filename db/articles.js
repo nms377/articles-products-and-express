@@ -48,7 +48,7 @@ function _getArticleByTitle(req, res){
 	dbArticles.one(`SELECT * FROM articles WHERE title = '${getArticle}'`)
 			.then( article => {
 				console.log('getArticleByTitle', article);
-				res.render('articles/article', {"getArticleByTitle": article});
+				res.render('articles/edit', {"getArticleByTitle": article});
 			})
 			.catch( err => {
 				console.log('err', err);
@@ -60,10 +60,17 @@ function _getArticleByTitle(req, res){
 
 function _editArticleByTitle(req, res){
 	
-	let editArticle = req.params.url_title;
-	console.log('url_title', url_title);
+	let editArticle = req.params.title;
+	let article = req.body;
+	console.log('editArticle', editArticle);
+	console.log('article', article);
 
-	db.none(`UPDATE articles SET product_name = '${editArticle}', price = ${editArticle.title}, inventory = ${editArticle.body} WHERE url_title = ${editArticle.url_title}`)
+	dbArticles.none(`UPDATE articles SET
+	 title = '${article.title}', 
+	 body = '${article.body}', 
+	 author = '${article.author}',
+	 url_title = '${encodeURI(article.title)}',
+	 WHERE title = '${editArticle}'`)
 			.then( (result) => {
 				res.redirect(`../edit`);
 			})
