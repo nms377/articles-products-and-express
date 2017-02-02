@@ -1,21 +1,22 @@
 <h1>EDIT ARTICLE</h1>
 
-{{#if editArticle}}
-	<form action="http://localhost:3000/articles/{{editArticle.urlTitle}}/?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
-		<input type="hidden" name="title" value="{{editArticle.id}}">
+{{#if getArticleByTitle}}
+	<form action="http://localhost:3000/articles/{{getArticleByTitle.url_title}}/?_method=PUT"  method="post" enctype="application/x-www-form-urlencoded">
+		<input type="hidden" name="title" value="{{getArticleByTitle.id}}">
 		<label name="name">Title</label>
-			<input name="title" type="text id="edit-article" value="{{editArticle.title}}"><br>
+			<input name="title" type="text id="edit-article" value="{{getArticleByTitle.title}}"><br>
 		<label name="POST-author">Author</label>
-			<input name="author" type="text id="edit-author" value="{{editArticle.author}}"><br>
+			<input name="author" type="text id="edit-author" value="{{getArticleByTitle.author}}"><br>
 		<label for="POST-body">Body</label>
-			<input name="body" type="text id="edit-body" value="{{editArticle.body}}"><br>
+			<input name="body" type="text id="edit-body" value="{{getArticleByTitle.body}}"><br>
 		<button type="submit">Submit</button>
 	</form>
 {{/if}}
 
 
 <div class="productList">
-	<p>Title: {{editArticle.title}}</p>
-	<p>Author: {{editArticle.author}}</p>
-	<p>Body: {{editArticle.body}}</p>
+	<p>Title: {{getArticleByTitle.title}}</p>
+	<p>Author: {{getArticleByTitle.author}}</p>
+	<p>Body: {{getArticleByTitle.body}}</p>
+	<p>URL Title: {{getArticleByTitle.url_title}}</p>
 </div>

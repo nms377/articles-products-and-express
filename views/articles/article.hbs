@@ -7,6 +7,7 @@
 		<p>Inventory: {{getArticleByTitle.body}}</p>
 		<p>Url Title: {{getArticleByTitle.url_title}}</p>
 	</div>
+	<form action="http://localhost:3000/articles/{{getArticleByTitle.url_title}}/edit" method="get" enctype="application/x-www-form-urlencoded"><button>Update This Article</button></form>
 {{else}}
 	<p>oops...</p>
 {{/if}}
