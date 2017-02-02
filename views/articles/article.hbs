@@ -1,8 +1,11 @@
-{{#if articleId}}
-	<div class="articleId">
-		<p>Name: {{articleId.title}}</p>
-		<p>Price: {{articleId.author}}</p>
-		<p>Inventory: {{articleId.body}}</p>
+<h1>{{getArticleByTitle.title}}</h1>
+
+{{#if getArticleByTitle}}
+	<div class="getgetArticleByTitleByTitle">
+		<p>Name: {{getArticleByTitle.title}}</p>
+		<p>Price: {{getArticleByTitle.author}}</p>
+		<p>Inventory: {{getArticleByTitle.body}}</p>
+		<p>Url Title: {{getArticleByTitle.url_title}}</p>
 	</div>
 {{else}}
 	<p>oops...</p>
